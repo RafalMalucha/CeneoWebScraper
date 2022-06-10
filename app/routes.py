@@ -80,14 +80,14 @@ def author():
 
 @app.route('/product/<product_id>')
 def product(product_id):
-    opinions = pd.read_json('opinions/'+product_id+'.json')
+    opinions = pd.read_json('app/opinions/'+product_id+'.json')
     opinions['stars'] = opinions['stars'].map(lambda x: float(x.split('/')[0].replace(',', '.')))
 
     stats = {
-    'opinions_count' = len(opinions),
-    'pros_count' = opinions['pros'].map(bool).sum(),
-    'cons_count' = opinions['cons'].map(bool).sum(),
-    'average_score' = opinions['stars'].mean().round(2)
+        'opinions_count': len(opinions),
+        'pros_count': opinions['pros'].map(bool).sum(),
+        'cons_count': opinions['cons'].map(bool).sum(),
+        'average_score': opinions['stars'].mean().round(2)
     }    
     if not os.path.exists('app/plots'):
         os.makedirs('app/plots')
@@ -99,7 +99,7 @@ def product(product_id):
         labels=['Nie polecam', 'Polecam', 'Nie mam zdania']
     )
     plt.title('Rekomendacje')
-    plt.savefig(f'plots/{product}_recommendations.png')
+    plt.savefig(f'app/plots/{product_id}_recommendations.png')
     plt.close()
 
     stars = opinions['stars'].value_counts().sort_index().reindex(list(np.arange(0,5.5,0.5)), fill_value=0)
@@ -111,6 +111,6 @@ def product(product_id):
     plt.ylabel('Liczba opinii')
     plt.grid(True, axis='y')
     plt.xticks(rotation=0)
-    plt.savefig(f'plots/{product}_stars.png')
+    plt.savefig(f'app/plots/{product_id}_stars.png')
     plt.close()
     return render_template('product.html.jinja', product_id=product_id, stats=stats, opinions=opinions)
