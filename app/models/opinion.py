@@ -1,5 +1,10 @@
+from app.routes import product
+from parameters import selectors
+from app.utils import get_item
+
 class Opinion():
-    def __init__(self, opinion_id, author, recommendation, stars, content, useful, useless, published, purchased, pros, cons):
+    def __init__(self, opinion_id, author='', recommendation=None, stars=0, content='', useful=0, useless=0,
+    published=None, purchased=None, pros=[], cons=[]):
         self.opinion_id = opinion_id
         self.author = author
         self.recommendation = recommendation
@@ -11,5 +16,12 @@ class Opinion():
         self.purchased = purchased
         self.pros = pros
         self.cons = cons 
+        return self
+
+    def extract_opinion(self, opinion):
+        for key,value in selectors.items():
+            setattr(self, key, get_item(opinion, *value))
+        self.opinion_id = opinion['data-entry-id']
+        return self
 
     
