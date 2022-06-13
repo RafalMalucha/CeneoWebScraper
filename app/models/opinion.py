@@ -1,5 +1,4 @@
-from app.routes import product
-from parameters import selectors
+from app.parameters import selectors
 from app.utils import get_item
 
 class Opinion():
@@ -23,5 +22,4 @@ class Opinion():
             setattr(self, key, get_item(opinion, *value))
         self.opinion_id = opinion['data-entry-id']
         return self
-
     
