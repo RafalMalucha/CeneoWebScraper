@@ -35,4 +35,4 @@ def author():
 
 @app.route('/product/<product_id>')
 def product(product_id):     
-    return render_template('product.html.jinja', product_id=product_id, stats=stats, opinions=opinions)
+    return render_template('product.html.jinja', product_id=product_id) #stats=stats, opinions=opinions)

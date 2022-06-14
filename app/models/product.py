@@ -83,16 +83,23 @@ class Product():
         return self
 
     def __str__(self) -> str:
-        return f'product id: {self.product_id} <br> product name: {self.procuct_name} <br> opinions <br>' + '<br>'.join(str(opinion) for opinion in self.opinions)
+        return f'''product id: {self.product_id} <br> product name: {self.procuct_name} 
+        <br> opinions: {self.opinions} <br> opinions_count: {self.opinions_count}
+        <br> pros_count: {self.pros_count} <br> cons_count: {self.cons_count}
+        <br> average_score: {self.average_score}'''
     
     def __repr__(self) -> str:
-        return f'Product(product_id={self.product_id}, product_name={self.procuct_name}, opinions=[' + ', '.join(opinion.__repr__() for opinion in self.opinions) + '])'
+        return self.__str__
 
     def to_dict(self) -> dict:
         return {
-            'product_id': self.product_id,
-            'product_name': self.procuct_name,
-            'opinions': [opinion.to_dict() for opinion in self.opinions]
+            "product_id": self.product_id,
+            "product_name": self.product_name,
+            "opinions": self.opinions,
+            "opinions_count": self.opinions_count,
+            "pros_count": self.pros_count,
+            "cons_count": self.cons_count,
+            "average_score": self.average_score
         }
 
     def export_opinions(self):
