@@ -2,7 +2,7 @@ from app.parameters import selectors
 from app.utils import get_item
 
 class Opinion():
-    def __init__(self, opinion_id, author='', recommendation=None, stars=0, content='', useful=0, useless=0,
+    def __init__(self, opinion_id='', author='', recommendation=None, stars=0, content='', useful=0, useless=0,
     published=None, purchased=None, pros=[], cons=[]):
         self.opinion_id = opinion_id
         self.author = author
